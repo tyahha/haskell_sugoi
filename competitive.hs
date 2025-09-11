@@ -1,2 +1,4 @@
 main :: IO ()
-main = putStrLn "Hello world"
+main = do
+  n <- readLn :: IO Int
+  print (n * n)
