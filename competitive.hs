@@ -1,5 +1,6 @@
 main :: IO ()
 main = do
-  [_, j] <- map read . words <$> getLine :: IO [Int]
-  as <- map read . words <$> getLine :: IO [Int]
-  putStr $ if j `elem` as then "Yes" else "No"
+  [i, j] <- map read . words <$> getLine :: IO [Int]
+  putStr $ if any (\a -> 100 `mod` a == 0) [i..j]
+    then "Yes"
+    else "No"
