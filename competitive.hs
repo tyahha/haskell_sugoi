@@ -1,6 +1,9 @@
 main :: IO ()
 main = do
-  [i, j] <- map read . words <$> getLine :: IO [Int]
-  putStr $ if any (\a -> 100 `mod` a == 0) [i..j]
+  [_, n] <- map read . words <$> getLine :: IO [Int]
+  ps <- map read . words <$> getLine :: IO [Int]
+  qs <- map read . words <$> getLine :: IO [Int]
+  let found = any (\p -> any (\q -> p + q == n) qs ) ps
+  putStr $ if found
     then "Yes"
     else "No"
