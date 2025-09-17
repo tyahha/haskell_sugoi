@@ -1,17 +1,12 @@
-combinations3 :: [a] -> [(a, a, a)]
-combinations3 xs =
-  [(x, y, z) |
-     (x, i) <- zip xs [0 .. ],
-     (y, j) <- zip xs [0 .. ],
-     i < j,
-     (z, k) <- zip xs [0 .. ],
-     j < k]
+combinations3 :: Int -> String -> String
+combinations3 n s =
+  if n == 0
+    then s
+    else combinations3 (n `div` 2) ((if even n then '0' else '1') : s )
 
 main :: IO ()
 main = do
-  _ <- map read . words <$> getLine :: IO [Int]
-  ps <- map read . words <$> getLine :: IO [Int]
-  let found = any (\(x,y,z) -> x + y + z == 1000 ) (combinations3 ps)
-  putStr $ if found
-    then "Yes"
-    else "No"
+  n <- readLn :: IO Int
+  let ss = combinations3 n ""
+  let rs = "0000000000" ++ ss
+  putStr $ drop (length rs - 10) rs
