@@ -1,6 +1,8 @@
 main :: IO ()
 main = do
-  ss <- getLine
-  let rs = reverse ss
-  let n = foldl (\acc (c, e) -> acc + if c == '1' then e else 0) 0 (zip rs (iterate (*2) 1))
-  print n
+  [_, q] <- map read . words <$> getLine :: IO [Int]
+  ps <- map read . words <$> getLine :: IO [Int]
+  let s = scanl (+) 0 ps
+  queries <- map (map read . words) . lines <$> getContents :: IO [[Int]]
+  let ans = map (\[l, r] -> s !! r - s !! (l - 1)) queries
+  putStr $ unlines $ map show ans
